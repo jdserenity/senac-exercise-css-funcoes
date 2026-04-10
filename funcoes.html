@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcoes do CSS</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; } 
+        
+        :root { --animation-delay-full: 0.4s; }
+
+        html { font-size: 24px; }
+
+        body { background-color: rgb(199, 199, 167); }
+
+        .definicoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        p { margin: 0; }
+        
+        .arrows {
+            display: inline-flex;
+            font-family: monospace;
+        }
+
+        .arrow { animation: flipArrow 2s infinite ease-in-out; }
+
+        .arrow:nth-child(1) { animation-delay: 0s; }
+        .arrow:nth-child(2) { animation-delay: calc(var(--animation-delay-full) / 4); } /* 0.1s */
+        .arrow:nth-child(3) { animation-delay: calc(var(--animation-delay-full) / 4 * 2); } /* 0.2s */
+        .arrow:nth-child(4) { animation-delay: calc(var(--animation-delay-full) / 4 * 3); } /* 0.3s */
+        .arrow:nth-child(5) { animation-delay: var(--animation-delay-full); } /* 0.4s */
+
+        .arrow::before { content: '>'; }
+
+        @keyframes flipArrow {
+            0% { transform: scaleX(1); }
+            10% { transform: scaleX(-1); }
+            90% { transform: scaleX(-1); }
+            100% { transform: scaleX(1); }
+        }
+
+        .arrows:hover { visibility: hidden; }
+
+        .arrows:hover ~ .explicacao { display: block; }
+        
+        .explicacao { 
+            display: none;
+            padding-inline-start: 1rem;
+        }
+
+        code {
+            background-color: darkgrey;
+            color: lightgrey;
+            font-size: 0.8rem;
+            padding-inline: 0.2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="definicoes">
+        <p>min(<span class="arrows">
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+            </span><span class="explicacao">a funcão <code>min()</code> deixa que o css escolha programticamente o valor menor de uns valores specificados. por exemplo, se você escolhara, <code>min(10vw, 500px)</code> o browser faria o elemento de largura 10vw, só enquanto o valor de 10vw seria menor que 500px.</span>)</p>
+    
+        <p>max(<span class="arrows">
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+            </span><span class="explicacao">a funcão <code>max()</code> é o oposto da funcão <code>min()</code>. deixa que o css escolha programticamente o valor <em>maior</em> de uns valores specificados. se você escrevera <code>max(50vh, 200px)</code> o browser faria o elemento de altura 50vh, só enquanto o valor de 50vh era maior que 200px.</span>)</p>
+    
+        <p>calc(<span class="arrows">
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+            </span><span class="explicacao">a funcão <code>calc()</code> é uma funcão muito usavel porque que deixa calcular valores que são dependentes de outros valores. Por exemplo, se você quiser fazer um elemento ao tamanho de meio do <code>viewhight</code> mais um terzo do tamanho duma letra multiplicado por 29 -- por suas razões, não jugo -- você poderia escrever <code>calc(50vh + (1rem / 3 * 29))</code>. obvio, o exemplo não e muito usavel, mais você pode ver como a funcão poderia ser.</span>)</p>
+    
+        <p>clamp(<span class="arrows">
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+                <span class="arrow"></span>
+            </span><span class="explicacao">a funcão <code>clamp()</code> deixa escolher programaticamente entre valores, mas ao mesmo tempo limitado por un rango. por exemplo, se você quiser ter um elemento ao tamanho do <code>50vw</code>, mas que não chega maior que <code>300px</code> or menor que <code>100px</code>, você poderia colocar <code>clamp(100px, 50vw, 300px)</code>. O elemento só ficaria com <code>50vw</code> se <code>50vw</code> sera entre <code>100px</code> e <code>300px</code>.</span>)</p>
+    </div>
+
+</body>
+</html>
