@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Funcoes do CSS</title>
+  <title>Funções do CSS</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -22,6 +22,10 @@
 
     p { margin: 0; }
 
+    .começo {
+      margin-block-end: 0.4rem;
+    }
+
     .arrows {
       display: inline-flex;
       font-family: monospace;
@@ -31,7 +35,7 @@
 
     .arrow:nth-child(1) { animation-delay: 0s; }
     .arrow:nth-child(2) { animation-delay: calc(var(--animation-delay-full) / 4); } /* 0.1s */
-    .arrow:nth-child(3) { animation-delay: calc(var(--animation-delay-full) / 4 * 2); } /* 0.2s */
+    .arrow:nth-child(3) { animation-delay: calc(var(--animation-delay-full) / 2); } /* 0.2s */
     .arrow:nth-child(4) { animation-delay: calc(var(--animation-delay-full) / 4 * 3); } /* 0.3s */
     .arrow:nth-child(5) { animation-delay: var(--animation-delay-full); } /* 0.4s */
 
@@ -73,29 +77,42 @@
       white-space: nowrap;
     }
 
-    #min-elemento { background-color: rgb(36, 142, 228); }
+    #min-elemento { 
+      background-color: rgb(36, 142, 228);
+      min-width: min(300px, 50vw);
+    }
 
-    #max-elemento { background-color: rgb(170, 33, 33); }
+    #max-elemento {
+      background-color: rgb(170, 33, 33);
+      max-width: max(700px, 89vw);
+    }
 
-    #calc-elemento { background-color: rgb(112, 135, 73); }
+    #calc-elemento {
+      background-color: rgb(112, 135, 73);
+      width: calc(var(--valor-px, 180px) + 28vw);
+    }
 
-    #clamp-elemento { background-color: rgb(213, 150, 43); }
+    #clamp-elemento {
+      background-color: rgb(213, 150, 43);
+      width: clamp(200px, var(--width-preferido, 50vw), 550px);
+    }
+
+    .final {
+      margin-block-start: 0.8rem;
+    }
 
   </style>
 </head>
-
 <body>
   <div class="definicoes">
-    <p>paira sobre as animações para ler as explicações :)</p>
+    <p class="começo">pairar (lol) sobre as animações para ler as explicações :)</p>
     <p>min(<span class="arrows">
         <span class="arrow"></span>
         <span class="arrow"></span>
         <span class="arrow"></span>
         <span class="arrow"></span>
         <span class="arrow"></span>
-      </span><span class="explicacao">a funcão <code>min()</code> deixa que o css escolha programticamente o valor menor
-        de uns valores specificados. por exemplo, se você escolhara, <code>min(10vw, 500px)</code> o browser faria o
-        elemento de largura 10vw, só enquanto o valor de 10vw seria menor que 500px.</span>)</p>
+      </span><span class="explicacao">a função <code>min()</code> deixa que o css escolha programaticamente o valor menor de uns valores especificados. por exemplo, se você escolher, <code>min(10vw, 500px)</code> o browser faria o elemento de largura 10vw, só enquanto o valor de 10vw seria menor que 500px.</span>)</p>
 
     <p>max(<span class="arrows">
         <span class="arrow"></span>
@@ -103,10 +120,7 @@
         <span class="arrow"></span>
         <span class="arrow"></span>
         <span class="arrow"></span>
-      </span><span class="explicacao">a funcão <code>max()</code> é o oposto da funcão <code>min()</code>. deixa que o
-        css escolha programticamente o valor <em>maior</em> de uns valores specificados. se você escrevera
-        <code>max(50vh, 200px)</code> o browser faria o elemento de altura 50vh, só enquanto o valor de 50vh era maior
-        que 200px.</span>)</p>
+      </span><span class="explicacao">a função <code>max()</code> é o oposto da funcão <code>min()</code>. deixa que o css escolha programaticamente o valor <em>maior</em> de uns valores especificados. se você escrever <code>max(50vh, 200px)</code> o browser faria o elemento de altura 50vh, só enquanto o valor de 50vh fosse maior que 200px.</span>)</p>
 
     <p>calc(<span class="arrows">
         <span class="arrow"></span>
@@ -114,11 +128,7 @@
         <span class="arrow"></span>
         <span class="arrow"></span>
         <span class="arrow"></span>
-      </span><span class="explicacao">a funcão <code>calc()</code> é uma funcão muito usavel porque que deixa calcular
-        valores que são dependentes de outros valores. Por exemplo, se você quiser fazer um elemento ao tamanho de meio
-        do <code>viewhight</code> mais um terzo do tamanho duma letra multiplicado por 29 -- por suas razões, não jugo
-        -- você poderia escrever <code>calc(50vh + (1rem / 3 * 29))</code>. obvio, o exemplo não e muito usavel, mais
-        você pode ver como a funcão poderia ser.</span>)</p>
+      </span><span class="explicacao">a função <code>calc()</code> é uma funcão muito usâvel porque que deixa calcular valores que são dependentes de outros valores. Por exemplo, se você quiser fazer um elemento ao tamanho de meio do <code>viewhight</code> mais um terço do tamanho de uma letra multiplicado por 29 -- por suas razões, não julgo -- você poderia escrever <code>calc(50vh + (1rem / 3 * 29))</code>. obvio, o exemplo não é muito usavel, mas você pode ver como a funcão poderia ser.</span>)</p>
 
     <p>clamp(<span class="arrows">
         <span class="arrow"></span>
@@ -126,70 +136,96 @@
         <span class="arrow"></span>
         <span class="arrow"></span>
         <span class="arrow"></span>
-      </span><span class="explicacao">a funcão <code>clamp()</code> deixa escolher programaticamente entre valores, mas
-        ao mesmo tempo limitado por un rango. por exemplo, se você quiser ter um elemento ao tamanho do
-        <code>50vw</code>, mas que não chega maior que <code>300px</code> or menor que <code>100px</code>, você poderia
-        colocar <code>clamp(100px, 50vw, 300px)</code>. O elemento só ficaria com <code>50vw</code> se <code>50vw</code>
-        sera entre <code>100px</code> e <code>300px</code>.</span>)</p>
+      </span><span class="explicacao">a função <code>clamp()</code> deixa escolher programaticamente entre valores, mas ao mesmo tempo limitado por um rango. por exemplo, se você quiser ter um elemento ao tamanho do <code>50vw</code>, mas que não chega maior que <code>300px</code> ou menor que <code>100px</code>, você poderia colocar <code>clamp(100px, 50vw, 300px)</code>. O elemento só ficaria com <code>50vw</code> se <code>50vw</code> estivesse entre <code>100px</code> e <code>300px</code>.</span>)</p>
   </div>
 
   <div class="exemplo">
     <button>encolher elemento min()</button>
     <button>crescer elemento min()</button>
-    <div id="min-elemento">elemento</div>
+    <span>min-width: min(300px, 50vw)</span>
+    <div id="min-elemento"></div>
   </div>
 
   <div class="exemplo">
     <button>encolher elemento max()</button>
     <button>crescer elemento max()</button>
-    <div id="max-elemento">elemento</div>
+    <span>max-width: max(700px, 89vw)</span>
+    <div id="max-elemento"></div>
   </div>
 
   <div class="exemplo">
-    <button>encolher elemento calc()</button>
-    <button>crescer elemento calc()</button>
-    <div id="calc-elemento">elemento</div>
+    <button>encolher valor px calc()</button>
+    <button>crescer valor px calc()</button>
+    <span>width: calc(var(--valor-px, 180px) + 28vw);</span>
+    <div id="calc-elemento"></div>
   </div>
 
   <div class="exemplo">
-    <button>encolher elemento clamp()</button>
-    <button>crescer elemento clamp()</button>
-    <div id="clamp-elemento">elemento</div>
+    <button>encolher width preferido clamp()</button>
+    <button>crescer width preferido clamp()</button>
+    <span>width: clamp(200px, var(--width-preferido, 50vw), 550px);</span>
+    <div id="clamp-elemento"></div>
   </div>
+
+  <p class="final">tira pergunta que eu consego responder! 👍</p>
 
   <script>
-    const min = document.getElementById('min-elemento');
-    const max = document.getElementById('max-elemento');
-    const calc = document.getElementById('calc-elemento');
-    const clamp = document.getElementById('clamp-elemento');
-    
-    const elementos = [min, max, calc, clamp]
+    const ids = ['min-elemento', 'max-elemento', 'calc-elemento', 'clamp-elemento'];
+    const elementos = ids.map(id => document.getElementById(id));
     
     const configurarDemos = () => {
       elementos.forEach(el => {
         const exemplo = el.parentElement;
         const [btnEncolher, btnCrescer] = exemplo.querySelectorAll('button');
-        
-        let width = parseInt(getComputedStyle(el).width);
-        el.textContent = `elemento ${width}px`;
 
-        const render = (increment) => {
-          let width = parseInt(getComputedStyle(el).width);
-          let newW = width + increment;
-          el.style.width = newW + 'px';
-          el.textContent = `elemento ${newW}`;
+        const atualizarEUsarValorCalc = (d) => {
+          let valor = parseInt(getComputedStyle(el).getPropertyValue('--valor-px')) || 180;
+          valor+=d;
+          el.style.setProperty('--valor-px', `${valor}px`);
+          return d;
+        }
+        
+        const atualizarEUsarPreferidoClamp = (d) => {
+          let vwPreferido = parseInt(getComputedStyle(el).getPropertyValue('--width-preferido')) || 50; // || 50 because adding a fallback in the css doesn't affect trying to get the value with js. It still returns NaN if it hasn't been set
+          vwPreferido+=d;
+          el.style.setProperty('--width-preferido', `${vwPreferido}vw`);
+          return d;
+        } // e uma funcão pura mano ;)
+
+        const render = (increment=0) => {
+          let windowW = window.innerWidth;
+          
+          if (['min-elemento', 'max-elemento'].includes(el.id)) {
+            let width = el.offsetWidth;
+            let newW = width + increment;
+            el.style.width = newW + 'px'; // este e o width que foi pretendido
+          }
+          
+          let renderedW = el.offsetWidth; // este e o width que foi realmente executado
+          let vw = Math.round(renderedW / windowW * 100); // 1vw is directly equivalent to 1% of the viewport (functional browser area) width. So calculating how many times the element fits into the viewport, gives us the vw, and then we normalize it to an integer. Ex. If the element can fit into the viewport exactly 0.5 times, then the vw is 50vw
+          
+          el.textContent = `${renderedW}px / ${windowW}px = ${vw}vw`;
         }
 
-        btnCrescer.addEventListener("click", () => render(50))
+        if (el.id === 'calc-elemento') {
+          btnCrescer.addEventListener("click", () => render(atualizarEUsarValorCalc(50)));
+          btnEncolher.addEventListener("click", () => render(atualizarEUsarValorCalc(-50)));
+        } else if (el.id === 'clamp-elemento') {
+          btnCrescer.addEventListener("click", () => render(atualizarEUsarPreferidoClamp(5)));
+          btnEncolher.addEventListener("click", () => render(atualizarEUsarPreferidoClamp(-5)));
+        } else {
+          btnCrescer.addEventListener("click", () => render(50));
+          btnEncolher.addEventListener("click", () => render(-50));
+        }
 
-        btnEncolher.addEventListener("click", () => render(-50))
+        window.addEventListener('resize', () => render())
+        
+        render()
       })
     }
 
     configurarDemos()
     
   </script>
-
 </body>
-
 </html>
